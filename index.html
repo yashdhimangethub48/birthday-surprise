@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#fff2f7">
+    <title>A Little Surprise For You 💗</title>
+    <style>
+        :root {
+            --pink: #f05a91;
+            --pink2: #ffb6d0;
+            --ink: #29212d;
+            --cream: #fffaf5;
+            --lav: #d9ccff
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Georgia, 'Times New Roman', serif;
+            color: var(--ink);
+            background: #fff3f7;
+            overflow-x: hidden
+        }
+
+        button {
+            font: 600 1rem system-ui, sans-serif;
+            border: 0;
+            cursor: pointer;
+            transition: transform .2s, filter .2s
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.03)
+        }
+
+        button:focus-visible {
+            outline: 3px solid #6f4a9e;
+            outline-offset: 3px
+        }
+
+        #app {
+            min-height: 100vh;
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            padding: max(18px, env(safe-area-inset-top)) 14px max(18px, env(safe-area-inset-bottom));
+            position: relative;
+            isolation: isolate
+        }
+
+        .bg-glow {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 15%, #fff 0, transparent 32%), radial-gradient(circle at 85% 80%, #f7d5e5 0, transparent 35%), linear-gradient(135deg, #fffaf4, #fce8f1 55%, #eee9ff);
+            transition: background 1s
+        }
+
+        .card {
+            width: min(720px, 100%);
+            min-height: 590px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #ffffffc9;
+            border-radius: 28px;
+            padding: clamp(22px, 5vw, 48px);
+            background: #fffaf2e8;
+            box-shadow: 0 24px 70px #9d52721c;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: arrive .65s cubic-bezier(.2, .8, .2, 1) both
+        }
+
+        @keyframes arrive {
+            from {
+                opacity: 0;
+                transform: translateY(18px) scale(.985)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .eyebrow {
+            font: italic 1rem cursive;
+            color: #c84d7c;
+            letter-spacing: .05em;
+            margin: 0 0 12px
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 4.7rem);
+            line-height: 1.02;
+            margin: 0 0 18px;
+            font-weight: 700;
+            letter-spacing: -.04em
+        }
+
+        h1 em {
+            color: #e64f89;
+            font-weight: 500
+        }
+
+        h2 {
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            line-height: 1.05;
+            margin: 0 0 16px
+        }
+
+        p {
+            font-size: clamp(1rem, 2.6vw, 1.18rem);
+            line-height: 1.65;
+            max-width: 540px;
+            margin: 8px auto 22px
+        }
+
+        .small {
+            font: .9rem system-ui, sans-serif;
+            color: #756875
+        }
+        .welcome-kicker {
+            display:inline-flex; align-items:center; gap:8px;
+            padding:8px 15px; border-radius:999px;
+            background:#fff0f5; color:#bd4777;
+            font:600 .76rem system-ui,sans-serif;
+            letter-spacing:.12em; text-transform:uppercase;
+            box-shadow:0 5px 18px #e88caf20; margin-bottom:18px
+        }
+        .welcome-copy { max-width:460px; margin:0 auto 4px }
+        .welcome-title { text-wrap:balance; text-shadow:0 5px 24px #e98cb322 }
+        .welcome-hint {
+            display:inline-flex; align-items:center; gap:7px;
+            color:#a36b83; font: .82rem system-ui,sans-serif;
+            margin-top:7px
+        }
+
+        .primary {
+            background: linear-gradient(135deg, #f45c94, #d93d79);
+            color: white;
+            border-radius: 999px;
+            padding: 15px 27px;
+            box-shadow: 0 8px 0 #b82d66, 0 13px 25px #d8487a35;
+            margin: 12px 4px 4px
+        }
+
+        .secondary {
+            background: #fff;
+            color: #b83970;
+            border: 1px solid #f2b4ca;
+            border-radius: 999px;
+            padding: 13px 22px;
+            margin: 8px 4px
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center
+        }
+
+        .decor {
+            position: absolute;
+            pointer-events: none;
+            animation: float 4s ease-in-out infinite
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-4deg)
+            }
+
+            50% {
+                transform: translateY(-12px) rotate(4deg)
+            }
+        }
+
+        .sparkle {
+            font-size: 1.6rem;
+            color: #dba64d
+        }
+
+        .bear {
+            font-size: 5rem;
+            filter: drop-shadow(0 8px 4px #d7a77d35);
+            animation: bob 2.5s ease-in-out infinite
+        }
+
+        @keyframes bob {
+
+            0%,
+            100% {
+                transform: rotate(-3deg) translateY(0)
+            }
+
+            50% {
+                transform: rotate(3deg) translateY(-8px)
+            }
+        }
+
+        .envelope {
+            position: relative;
+            width: min(360px, 84vw);
+            height: 218px;
+            margin: 24px auto 28px;
+            animation: envelopeFloat 3.2s ease-in-out infinite;
+            filter: drop-shadow(0 14px 18px #b75d7a20);
+            background: #f2dfc4;
+            border-radius: 10px;
+            box-shadow: 0 18px 35px #7f5b4b26;
+            cursor: pointer;
+            perspective: 600px
+        }
+
+        @keyframes envelopeFloat {
+            0%,100% { transform: translateY(0) rotate(-.5deg) }
+            50% { transform: translateY(-8px) rotate(.5deg) }
+        }
+        .envelope:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(140deg, transparent 49%, #e4c7a7 50%) left/50% 100% no-repeat, linear-gradient(220deg, transparent 49%, #ead2b4 50%) right/50% 100% no-repeat;
+            border-radius: 10px
+        }
+
+        .flap {
+            position: absolute;
+            inset: 0 0 auto;
+            height: 58%;
+            background: #f8e8d3;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            transform-origin: top;
+            transition: transform .7s;
+            z-index: 3
+        }
+
+        .seal {
+            position: absolute;
+            z-index: 4;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 58px;
+            height: 58px;
+            background: #e96c91;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: 1.7rem;
+            box-shadow: 0 4px 8px #a94d6835
+        }
+
+        .letter {
+            position: absolute;
+            z-index: 2;
+            left: 8%;
+            right: 8%;
+            top: 14%;
+            height: 72%;
+            background: #fffaf3;
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            transition: transform .8s;
+            padding: 10px
+        }
+
+        .envelope.open .flap {
+            transform: rotateX(180deg);
+            z-index: 1
+        }
+
+        .envelope.open .letter {
+            transform: translateY(-75px)
+        }
+
+        .dark {
+            background: radial-gradient(ellipse at 50% 65%, #2a2854 0, #12152f 60%, #080a1b 100%);
+            color: #fff
+        }
+
+        .dark .card {
+            background: transparent;
+            border: 0;
+            box-shadow: none
+        }
+
+        .dark h2 {
+            color: #fff
+        }
+
+        .dark p {
+            color: #d8d7f1
+        }
+
+        .dark .eyebrow {
+            color: #fff1a7
+        }
+
+        .stars {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background-image: radial-gradient(#fff 1px, transparent 1px), radial-gradient(#a8c4ff 1px, transparent 1px);
+            background-size: 72px 72px, 109px 109px;
+            background-position: 0 0, 30px 44px;
+            opacity: .45;
+            animation: starshift 18s linear infinite
+        }
+
+        @keyframes starshift {
+            to {
+                background-position: 72px 72px, 139px 153px
+            }
+        }
+
+        .lamp {
+            font-size: 4.4rem;
+            filter: drop-shadow(0 0 24px #ffe88b);
+            animation: glow 1.6s infinite alternate
+        }
+
+        @keyframes glow {
+            from {
+                filter: drop-shadow(0 0 8px #ffe88b)
+            }
+
+            to {
+                filter: drop-shadow(0 0 35px #ffe88b)
+            }
+        }
+
+        .cake {
+            width: 250px;
+            max-width: 75vw;
+            height: 205px;
+            position: relative;
+            margin: 25px auto 15px
+        }
+
+        .tier {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 12px 12px 18px 18px;
+            box-shadow: inset 0 -8px #0000000b, 0 8px 0 #d8a5bb55
+        }
+
+        .tier:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -10px;
+            height: 23px;
+            border-radius: 50%;
+            background: #fff2f8
+        }
+
+        .tier.bottom {
+            bottom: 8px;
+            width: 245px;
+            height: 68px;
+            background: #f35c96
+        }
+
+        .tier.mid {
+            bottom: 68px;
+            width: 190px;
+            height: 57px;
+            background: #c6b6fa
+        }
+
+        .tier.top {
+            bottom: 119px;
+            width: 135px;
+            height: 48px;
+            background: #ffd96e
+        }
+
+        .candle {
+            position: absolute;
+            bottom: 164px;
+            left: calc(50% - 43px);
+            width: 10px;
+            height: 38px;
+            background: repeating-linear-gradient(45deg, #fff 0 7px, #fb83a9 7px 14px);
+            border-radius: 4px
+        }
+
+        .candle:nth-child(2) {
+            left: calc(50% - 8px)
+        }
+
+        .candle:nth-child(3) {
+            left: calc(50% + 27px)
+        }
+
+        .flame {
+            position: absolute;
+            top: -17px;
+            left: 1px;
+            width: 9px;
+            height: 15px;
+            background: #ffbe45;
+            border-radius: 80% 0 80% 80%;
+            transform: rotate(45deg);
+            box-shadow: 0 0 13px #ffcf5c;
+            animation: flicker .35s infinite alternate
+        }
+
+        @keyframes flicker {
+            to {
+                transform: rotate(38deg) scale(.85)
+            }
+        }
+
+        .cake-slice {
+            position: absolute;
+            z-index: 5;
+            left: 57%;
+            top: 43px;
+            width: 76px;
+            height: 112px;
+            opacity: 0;
+            transform: translate(0,0) rotate(0);
+            transition: transform .85s cubic-bezier(.2,.8,.2,1), opacity .25s;
+            pointer-events: none
+        }
+        .cake-slice .slice-top {
+            position:absolute; top:0; left:0; width:76px; height:23px;
+            border-radius:50%; background:#fff2f8; border:2px solid #f7d7e5
+        }
+        .cake-slice .slice-mid, .cake-slice .slice-bottom {
+            position:absolute; left:5px; width:66px; height:38px;
+            clip-path:polygon(0 0,100% 0,76% 100%,24% 100%)
+        }
+        .cake-slice .slice-mid { top:17px; background:#c6b6fa }
+        .cake-slice .slice-bottom { top:52px; height:49px; background:#f35c96 }
+        .cake-slice .slice-cream {
+            position:absolute; top:49px; left:20px; width:36px; height:8px;
+            background:#fff2f8; border-radius:50%
+        }
+        .cake.cut .cake-slice {
+            opacity:1;
+            transform: translate(43px,28px) rotate(13deg)
+        }
+        .cake.cut .tier { filter: drop-shadow(0 4px 3px #9c547044) }
+        .cake.cut:after {
+            content:"";
+            position:absolute; left:52%; top:27px; height:135px;
+            border-left:2px dashed #fff; transform:rotate(7deg);
+            opacity:.85; animation: arrive .45s
+        }
+        .type-cursor:after { content:"|"; color:#e64f89; animation: blink .7s infinite }
+        @keyframes blink { 50% { opacity:0 } }
+
+        .cake.out .flame {
+            display: none
+        }
+
+        .photo-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 18px;
+            width: 100%;
+            max-width: 540px;
+            margin: 24px auto;
+            text-align: left;
+            position: relative
+        }
+        .photo-grid:before {
+            content: "";
+            position: absolute;
+            left: 17px;
+            top: 20px;
+            bottom: 20px;
+            width: 2px;
+            background: linear-gradient(#f58db2, #c9b8fa);
+            opacity: .65
+        }
+        .memory-item {
+            display: grid;
+            grid-template-columns: 36px 112px minmax(0,1fr);
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            animation: memoryIn .65s both;
+            animation-delay: var(--delay, 0s)
+        }
+        @keyframes memoryIn {
+            from { opacity: 0; transform: translateY(18px) }
+            to { opacity: 1; transform: translateY(0) }
+        }
+        .memory-dot {
+            width: 13px; height: 13px; border-radius: 50%;
+            background: #ed6b9a; border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #ed6b9a; justify-self: center; z-index: 1
+        }
+        .polaroid {
+            background: #fff;
+            padding: 6px 6px 9px;
+            box-shadow: 0 8px 20px #60485b20;
+            transform: rotate(var(--rot));
+            transition: transform .25s;
+            cursor: default;
+            border-radius: 5px
+        }
+        .polaroid:hover { transform: rotate(0) translateY(-4px) }
+        .photo {
+            aspect-ratio: 1/1;
+            background: linear-gradient(145deg, #f6b6cc, #f9e6bb 55%, #c9c3ff);
+            display: grid;
+            place-items: center;
+            font-size: 2rem;
+            overflow: hidden;
+            border-radius: 3px
+        }
+        .photo img { width: 100%; height: 100%; object-fit: cover; display: block }
+        .memory-copy { min-width: 0 }
+        .memory-copy strong { display:block; color:#b94375; font-size:1rem; margin-bottom:5px }
+        .memory-copy span { color:#796c78; font: .84rem/1.45 system-ui,sans-serif }
+        .change-hint { display:block; margin-top:5px; color:#c65b86; font: .72rem system-ui,sans-serif }
+        .polaroid input { display: none }
+
+        .polaroid {
+            background: #fff;
+            padding: 10px 10px 17px;
+            box-shadow: 0 9px 22px #60485b24;
+            transform: rotate(var(--rot));
+            transition: transform .25s;
+            cursor: pointer
+        }
+
+        .polaroid:hover {
+            transform: rotate(0) translateY(-5px)
+        }
+
+        .photo {
+            aspect-ratio: 1/1;
+            background: linear-gradient(145deg, #f6b6cc, #f9e6bb 55%, #c9c3ff);
+            display: grid;
+            place-items: center;
+            font-size: 3.5rem;
+            overflow: hidden
+        }
+
+        .photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block
+        }
+
+        .polaroid input {
+            display: none
+        }
+
+        .caption {
+            font: italic .95rem cursive;
+            margin-top: 10px
+        }
+
+        .gallery-note {
+            font: .85rem system-ui, sans-serif;
+            color: #796c78
+        }
+
+        .letter-paper {
+            max-width: 560px;
+            text-align: left;
+            padding: 25px 25px 30px;
+            background: repeating-linear-gradient(#fffaf4 0 31px, #e8dfe1 32px);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px #74515c16;
+            transform: rotate(-1deg)
+        }
+
+        .letter-paper p {
+            font-size: 1.04rem;
+            line-height: 1.95;
+            margin: 0 auto 15px
+        }
+
+        .final-heart {
+            font-size: 5rem;
+            animation: heartbeat 1.2s infinite
+        }
+
+        @keyframes heartbeat {
+
+            0%,
+            100% {
+                transform: scale(1)
+            }
+
+            20% {
+                transform: scale(1.15)
+            }
+
+            40% {
+                transform: scale(1)
+            }
+
+            60% {
+                transform: scale(1.1)
+            }
+        }
+
+        .progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            width: 0;
+            background: #e8508a;
+            transition: width .4s;
+            z-index: 20
+        }
+
+        .step-count {
+            font: .75rem system-ui, sans-serif;
+            color: #9c8292;
+            letter-spacing: .12em;
+            margin-bottom: 22px
+        }
+
+        .confetti {
+            position: fixed;
+            top: -20px;
+            z-index: 10;
+            pointer-events: none;
+            animation: fall 3.2s linear forwards
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(720deg);
+                opacity: 0
+            }
+        }
+
+        .file-input {
+            display: none
+        }
+
+        @media(max-width:480px) {
+            body { min-width: 320px; }
+            #app {
+                min-height: 100svh;
+                padding: max(10px, env(safe-area-inset-top)) 10px max(14px, env(safe-area-inset-bottom));
+                place-items: start center;
+            }
+            .card {
+                width: 100%;
+                min-height: calc(100svh - 24px);
+                border-radius: 22px;
+                padding: 30px 17px 26px;
+                justify-content: center;
+                overflow: visible;
+            }
+            h1 { font-size: clamp(2.25rem, 11vw, 3.25rem); }
+            h2 { font-size: clamp(1.8rem, 8vw, 2.5rem); }
+            .welcome-kicker { font-size:.68rem; letter-spacing:.08em; padding:8px 11px; }
+            .envelope { width:min(330px, 86vw); height:190px; margin:22px auto 20px; }
+            .primary, .secondary { min-height:48px; padding:14px 22px; }
+            .photo-grid { max-width:100%; }
+            .memory-item { grid-template-columns: 24px 100px minmax(0,1fr); gap:10px; }
+            .photo-grid:before { left:11px; }
+            .memory-copy span { font-size:.76rem; }
+            .letter-paper { width:100%; }
+
+            .photo-grid { gap: 16px }
+            .memory-item { grid-template-columns: 30px 88px minmax(0,1fr); gap: 9px }
+            .photo-grid:before { left: 14px }
+            .memory-copy strong { font-size: .9rem }
+            .memory-copy span { font-size: .78rem }
+
+            .letter-paper {
+                padding: 18px
+            }
+
+            .envelope {
+                height: 175px
+            }
+
+            .cake {
+                transform: scale(.9);
+                margin-top: 10px;
+                margin-bottom: 0
+            }
+        }
+
+        @media(min-width:481px) and (max-width:760px) {
+            .card { width:min(680px,100%); padding:30px 24px; }
+            .memory-item { grid-template-columns:32px 105px minmax(0,1fr); }
+        }
+        @media(prefers-reduced-motion:reduce) {
+
+            *,
+            *:before,
+            *:after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: .01ms !important
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg-glow" id="bg"></div>
+    <div class="progress" id="progress"></div>
+    <main id="app" aria-live="polite"></main>
+    <script>
+        const params = new URLSearchParams(location.search);
+        const recipient = params.get('to') || 'Meri Moto';
+        const sender = params.get('from') || 'tera motu';
+        const birthdayDate = params.get('date') || '13-Nov-2026';
+        // Replace only the image paths below with your own photos (2019–2026).
+        // Keep each year and image together; local files can be placed in an "images" folder.
+        const photos = [
+            { year: '2019', caption: 'Where our story began', image: 'images/2019.jpeg' },
+            { year: '2020', caption: 'Little moments, big memories', image: 'images/2020.jpeg' },
+            { year: '2021', caption: 'Smiles worth remembering', image: 'images/2021.jpeg' },
+            { year: '2022', caption: 'A year full of moments', image: 'images/2022.jpeg' },
+            { year: '2023', caption: 'Growing, laughing, shining', image: 'images/2023.jpeg' },
+            { year: '2024', caption: 'More memories together', image: 'images/2024.jpeg' },
+            { year: '2025', caption: 'A little more magic', image: 'images/2025.jpeg' },
+            { year: '2026', caption: 'And the story goes on…', image: 'images/2026.jpeg' }
+        ];
+        let step = 0, wished = false;
+        const app = document.getElementById('app'), bg = document.getElementById('bg'), progress = document.getElementById('progress');
+        function button(label, fn, secondary = false) { return `<button class="${secondary ? 'secondary' : 'primary'}" onclick="${fn}">${label}</button>` }
+        function shell(content, extra = '') { return `<section class="card ${extra}">${content}</section>` }
+        function render() {
+            progress.style.width = (step / 7 * 100) + '%';
+            document.body.classList.toggle('night', step === 1);
+            bg.style.background = step === 1 ? 'radial-gradient(circle at 50% 35%,#252651,#080a1b 75%)' : 'radial-gradient(circle at 20% 15%,#fff 0,transparent 32%),radial-gradient(circle at 85% 80%,#f7d5e5 0,transparent 35%),linear-gradient(135deg,#fffaf4,#fce8f1 55%,#eee9ff)';
+            let c = '';
+            if (step === 0) c = `<span class="decor sparkle" style="top:8%;left:9%">✦</span><span class="decor" style="top:12%;right:9%;font-size:2rem">💗</span><span class="decor" style="bottom:12%;left:8%;font-size:1.5rem">🌸</span><div class="welcome-kicker">♡ a little surprise, made with love ♡</div><p class="eyebrow">hey ${esc(recipient)}…</p><h1 class="welcome-title">Something <em>special</em><br>is waiting for you</h1><p class="welcome-copy">A tiny collection of smiles, memories and a whole lot of love — made just for your day.</p><div class="envelope" id="envelope" onclick="this.classList.add('open');setTimeout(next,650)"><div class="letter"><span style="font-size:1.35rem;color:#a94b72">For ${esc(recipient)} ♡</span><span style="color:#d74d83;font:italic 1rem cursive;margin-top:8px">a little note for you</span></div><div class="flap"></div><div class="seal">♡</div></div>${button('💌 Open your surprise', 'next()')}<span class="welcome-hint"> <span>☝️</span> Tap the envelope or open the surprise</span>`;
+            if (step === 1) c = `<div class="stars"></div><div class="step-count">SURPRISE 01 · THE LIGHTS</div><p class="eyebrow">shhh...</p><div class="lamp">🌙</div><h2>The room is<br>waiting for you.</h2><p>Someone left the lights off on purpose.<br>Shall we make this a little brighter?</p>${button('✨ Turn on the lights', 'lightsOn()')}`;
+            if (step === 2) c = `<span class="decor" style="top:8%;right:8%;font-size:2rem">🎈</span><span class="decor" style="bottom:15%;left:6%;font-size:2.5rem">🧸</span><div class="step-count">SURPRISE 02 · YOUR DAY</div><p class="eyebrow">look who's having a birthday...</p><h1>Happy Birthday,<br><em>${esc(recipient)}</em> ✨</h1>${birthdayDate ? `<p class="small">🎂 ${esc(birthdayDate)}</p>` : ''}<div class="bear">🧸🎁</div><p>May this new chapter bring you a thousand tiny reasons to smile.</p>${button("There's more 💝", 'next()')}`;
+            if (step === 3) c = `<div class="step-count">SURPRISE 03 · CAKE TIME</div><p class="eyebrow">make a little wish</p><h2>Make the first cut ✨</h2><p class="small">Swipe down across the cake, or tap the cake to cut it.</p><div class="cake" id="cake" onclick="cutCake()"><div class="tier bottom"></div><div class="tier mid"></div><div class="tier top"></div><div class="candle"><i class="flame"></i></div><div class="candle"><i class="flame"></i></div><div class="candle"><i class="flame"></i></div><div class="cake-slice"><span class="slice-top"></span><span class="slice-mid"></span><span class="slice-cream"></span><span class="slice-bottom"></span></div></div><p id="cake-msg">Three candles, a hundred wishes. Make yours count. 🕯️</p><div class="btn-row">${button('🔪 Cut the cake', 'cutCake()', true)}${button('🕯️ Blow out candles', 'blowCandles()')}</div><div id="cake-next"></div>`;
+            if (step === 4) c = `<span class="decor" style="top:12%;left:12%;font-size:2rem">⭐</span><div class="step-count">SURPRISE 04 · A LITTLE WISH</div><p class="eyebrow">close your eyes...</p><div class="bear">🧸 🎂</div><h2>Make a little wish<br>for the year ahead.</h2><p>Think of something your heart has been quietly hoping for. You deserve beautiful things, and beautiful days.</p>${button('✨ I made my wish', 'makeWish()')}<div id="wish-msg"></div>`;
+            if (step === 5) c = `<div class="step-count">SURPRISE 05 · LITTLE MEMORIES</div><p class="eyebrow">little moments, kept close</p><h2>Our memory timeline 📸</h2><p>A little timeline of memories, from 2019 to 2026.</p><div class="photo-grid">${photos.map((p, i) => `<div class="memory-item" style="--delay:${i * .10}s"><span class="memory-dot"></span><div class="polaroid" style="--rot:${i % 2 === 0 ? '-2deg' : '2deg'}"><div class="photo"><img alt="${p.year} birthday memory" src="${p.image}"></div></div><div class="memory-copy"><strong>${p.year} ✨</strong><span>${p.caption}</span><small class="change-hint">A little piece of our story</small></div></div>`).join('')}</div><p class="gallery-note">These are local starter illustrations. You can replace the image files inside the images folder with your own photos.</p>${button('Read your letter 💌', 'next()')}`;
+            if (step === 6) c = `<div class="step-count">SURPRISE 06 · JUST FOR YOU</div><p class="eyebrow">a little note from my heart</p><h2>For you, ${esc(recipient)} 💗</h2><div class="letter-paper" id="typed-letter"><p data-type="Happy birthday, you wonderful human."></p><p data-type="I wanted to make you something that felt a little like you — warm, a bit silly, and full of tiny surprises. So here it is: a small corner of the internet that exists only because you do."></p><p data-type="Thank you for the laughs, the little moments, and all the memories still waiting to happen. I hope this year brings you peaceful mornings, good news, and every reason to smile."></p><p data-type="Whatever you wished for, I hope it finds its way to you. And if it takes a little while, I hope you remember how loved and appreciated you are."></p><p data-type="With love, ${sender} ♡" style="text-align:right;font-style:italic"></p></div>${button('One last thing ✨', 'next()')}`;
+            if (step === 7) c = `<div class="step-count">YOUR FINAL SURPRISE</div><div class="final-heart">💗</div><p class="eyebrow">made especially for you</p><h1>Happy Birthday,<br><em>${esc(recipient)}!</em> 🎂</h1><p>May your days be soft, your dreams be big, and your heart always find reasons to feel happy.</p><p style="font-style:italic">You deserve to feel special — today and every day.</p>${button('↻ Replay the surprise', 'restart()', true)}<p class="small">Made with a little code and a lot of heart.</p>`;
+            app.innerHTML = shell(c, step === 1 ? 'dark' : '');
+            if (step === 1) document.querySelector('.card').style.background = 'transparent';
+            // Keep each new chapter in view, including on long mobile screens.
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (step === 3) { let cake = document.getElementById('cake'); cake.addEventListener('touchstart', e => { cake.dataset.y = e.touches[0].clientY }, { passive: true }); cake.addEventListener('touchend', e => { if (Math.abs(e.changedTouches[0].clientY - (+cake.dataset.y || 0)) > 35) cutCake() }, { passive: true }) }
+            if (step === 6) typeLetter();
+        }
+        function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) }
+        function next() { step = Math.min(step + 1, 7); render(); if (step === 2 || step === 7) confetti() }
+        function lightsOn() { step = 2; render(); confetti() }
+        function cutCake() { const cake = document.getElementById('cake'); if (!cake || cake.classList.contains('cut')) return; cake.classList.add('cut'); document.getElementById('cake-msg').textContent = 'A perfect little slice, just for you! 🍰'; document.getElementById('cake-next').innerHTML = button('Next surprise 💗', 'next()'); confetti(18) }
+        function blowCandles() { const cake = document.getElementById('cake'); if (!cake) return; cake.classList.add('out'); document.getElementById('cake-msg').textContent = 'Wish sent into the universe. ✨'; document.getElementById('cake-next').innerHTML = button('Keep going 💗', 'next()'); confetti(18) }
+        function makeWish() { wished = true; document.getElementById('wish-msg').innerHTML = '<p>May your wish find its way to you. 🌟</p>' + button('See our memories 📸', 'next()'); confetti(24) }
+        function typeLetter() {
+            const paragraphs = [...document.querySelectorAll('#typed-letter [data-type]')];
+            let paragraphIndex = 0;
+            function typeNextParagraph() {
+                if (paragraphIndex >= paragraphs.length) return;
+                const el = paragraphs[paragraphIndex++];
+                const fullText = el.dataset.type;
+                el.classList.add('type-cursor');
+                let charIndex = 0;
+                const timer = setInterval(() => {
+                    el.textContent = fullText.slice(0, ++charIndex);
+                    if (charIndex >= fullText.length) {
+                        clearInterval(timer);
+                        el.classList.remove('type-cursor');
+                        setTimeout(typeNextParagraph, 260);
+                    }
+                }, 24);
+            }
+            typeNextParagraph();
+        }
+        function confetti(n = 36) { const bits = ['💗', '✨', '🌸', '⭐', '🎉', '💕']; for (let i = 0; i < n; i++) { const el = document.createElement('span'); el.className = 'confetti'; el.textContent = bits[Math.floor(Math.random() * bits.length)]; el.style.left = Math.random() * 100 + 'vw'; el.style.animationDelay = Math.random() * .8 + 's'; el.style.fontSize = (12 + Math.random() * 18) + 'px'; document.body.appendChild(el); setTimeout(() => el.remove(), 4200) } }
+        function restart() { step = 0; render() }
+        render();
+    </script>
+</body>
+
+</html>
