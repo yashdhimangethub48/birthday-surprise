@@ -724,6 +724,604 @@
                 transition-duration: .01ms !important
             }
         }
+
+        :root {
+            --pink: #f27ca9;
+            --pink2: #ffc0d5;
+            --ink: #332331;
+            --cream: #fffaf5;
+            --lav: #ded0ff;
+            --gold: #f7d88a;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            min-height: 100svh;
+            color: var(--ink);
+            background: #1b1020;
+            font-family: "Segoe UI", system-ui, sans-serif
+        }
+
+        .bg-glow {
+            background-size: 180% 180%;
+            animation: auroraDrift 20s ease-in-out infinite alternate
+        }
+
+        @keyframes auroraDrift {
+            from { background-position: 0% 40% }
+            to { background-position: 100% 60% }
+        }
+
+        #app {
+            min-height: 100svh;
+            padding: max(28px, env(safe-area-inset-top)) 22px max(28px, env(safe-area-inset-bottom))
+        }
+
+        .card {
+            width: min(900px, 100%);
+            min-height: min(740px, calc(100svh - 56px));
+            padding: clamp(32px, 6vw, 72px);
+            overflow: hidden;
+            border: 1px solid #fff9f080;
+            border-radius: 36px;
+            background:
+                radial-gradient(ellipse at 9% 5%, #ffe1ec99, transparent 34%),
+                radial-gradient(ellipse at 93% 93%, #e4d7ff85, transparent 36%),
+                linear-gradient(145deg, #fffdf8 0%, #fff8f1 52%, #fff2f6 100%);
+            box-shadow: 0 35px 100px #08061075, 0 0 0 1px #ffffff18, inset 0 1px #ffffff;
+            animation: sceneEnter .85s cubic-bezier(.16, 1, .3, 1) both;
+            transform-origin: 50% 70%
+        }
+
+        @keyframes sceneEnter {
+            from { opacity: 0; transform: translateY(28px) scale(.96) rotateX(3deg); filter: blur(7px) }
+            to { opacity: 1; transform: translateY(0) scale(1) rotateX(0); filter: blur(0) }
+        }
+
+        .card > :not(.stars):not(.decor):not(.memory-item) {
+            animation: contentRise .7s cubic-bezier(.2, .8, .2, 1) both
+        }
+
+        .card > :nth-child(2) { animation-delay: 80ms }
+        .card > :nth-child(3) { animation-delay: 140ms }
+        .card > :nth-child(4) { animation-delay: 200ms }
+        .card > :nth-child(5) { animation-delay: 260ms }
+        .card > :nth-child(6) { animation-delay: 320ms }
+
+        @keyframes contentRise {
+            from { opacity: 0; transform: translateY(13px) }
+            to { opacity: 1; transform: translateY(0) }
+        }
+
+        .eyebrow {
+            color: #b94d79;
+            font: 600 .78rem/1.4 "Segoe UI", system-ui, sans-serif;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            margin-bottom: 16px
+        }
+
+        h1, h2 {
+            font-family: Georgia, "Times New Roman", serif;
+            letter-spacing: -.045em
+        }
+
+        h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: .98;
+            margin-bottom: 22px
+        }
+
+        h2 {
+            font-size: clamp(2.4rem, 6vw, 4.2rem);
+            line-height: 1;
+            margin-bottom: 20px
+        }
+
+        h1 em {
+            color: #d8457e;
+            font-style: italic;
+            text-shadow: 0 9px 35px #eb8bad48
+        }
+
+        p {
+            max-width: 560px;
+            font-size: clamp(1.02rem, 2.4vw, 1.2rem);
+            line-height: 1.75;
+            color: #665664
+        }
+
+        .welcome-kicker {
+            padding: 10px 17px;
+            border: 1px solid #f1c5d5;
+            background: #fff7f9;
+            color: #a63e6d;
+            box-shadow: 0 8px 26px #ae60721b;
+            font-size: .72rem;
+            letter-spacing: .16em
+        }
+
+        .welcome-title { text-shadow: 0 12px 40px #d57a9d24 }
+
+        .primary, .secondary {
+            min-height: 54px;
+            padding: 15px 28px;
+            font-size: .95rem;
+            letter-spacing: .01em;
+            transition: transform .22s, box-shadow .22s, filter .22s
+        }
+
+        .primary {
+            background: linear-gradient(115deg, #f079a2, #d43d78);
+            box-shadow: 0 5px 0 #a92c60, 0 13px 28px #d8487a3d, inset 0 1px #ffffff55
+        }
+
+        .primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 0 #a92c60, 0 19px 32px #d8487a48
+        }
+
+        .secondary {
+            border-color: #efc0d0;
+            background: #fffdfb;
+            box-shadow: 0 6px 18px #9a597a13
+        }
+
+        .step-count {
+            position: relative;
+            z-index: 1;
+            margin-bottom: 28px;
+            padding: 9px 15px;
+            border: 1px solid #edc8d680;
+            border-radius: 999px;
+            background: #fff9f4b8;
+            color: #a36680;
+            font-size: .68rem;
+            letter-spacing: .18em
+        }
+
+        .decor { filter: drop-shadow(0 8px 12px #a8557722) }
+        .sparkle { color: #d9a83e }
+
+        .envelope {
+            margin-top: 30px;
+            filter: drop-shadow(0 24px 24px #6c3e4c35);
+            transition: filter .4s
+        }
+
+        .envelope:hover { filter: drop-shadow(0 28px 30px #6c3e4c48) }
+        .envelope.open .seal { opacity: 0; transition: opacity .25s }
+
+        .bear {
+            font-size: clamp(4.5rem, 11vw, 7rem);
+            filter: drop-shadow(0 14px 12px #b15a7830);
+            animation: bearFloat 3s ease-in-out infinite
+        }
+
+        @keyframes bearFloat {
+            0%, 100% { transform: translateY(0) rotate(-2deg) }
+            50% { transform: translateY(-12px) rotate(2deg) }
+        }
+
+        .lamp {
+            font-size: 5.2rem;
+            filter: drop-shadow(0 0 30px #ffe88b);
+            animation: lampPulse 1.7s ease-in-out infinite alternate
+        }
+
+        @keyframes lampPulse {
+            from { transform: scale(.94); filter: drop-shadow(0 0 13px #ffe88b) }
+            to { transform: scale(1.06); filter: drop-shadow(0 0 42px #ffe88b) }
+        }
+
+        .dark {
+            color: #fff9f2;
+            background: radial-gradient(ellipse at 50% 62%, #262343 0%, #111126 58%, #080914 100%)
+        }
+
+        .dark .card {
+            border: 1px solid #ffffff1b;
+            background:
+                radial-gradient(ellipse at 50% 5%, #6f568c45, transparent 48%),
+                linear-gradient(145deg, #201a35d9, #131426e8);
+            box-shadow: 0 35px 110px #00000066, inset 0 1px #ffffff18
+        }
+
+        .dark h2 { color: #fff8f1 }
+        .dark p { color: #d6cee8 }
+        .dark .eyebrow { color: #ffe6a1 }
+        .dark .step-count { border-color: #ffffff24; background: #ffffff0b; color: #f7d9a2 }
+
+        .stars {
+            opacity: .7;
+            mask-image: linear-gradient(transparent, #000 18%, #000 80%, transparent)
+        }
+
+        .cake {
+            filter: drop-shadow(0 20px 20px #7f496b27);
+            animation: cakeArrive .8s cubic-bezier(.2, .8, .2, 1) both
+        }
+
+        @keyframes cakeArrive {
+            from { opacity: 0; transform: translateY(22px) scale(.88) }
+            to { opacity: 1; transform: translateY(0) scale(1) }
+        }
+
+        .candle .flame { transform-origin: 50% 100% }
+        .cake.out .flame { animation: flameOut .35s ease-out forwards }
+
+        @keyframes flameOut {
+            to { opacity: 0; transform: translateY(-12px) scale(.1) }
+        }
+
+        .photo-grid {
+            max-width: 650px;
+            gap: 20px;
+            padding: 10px 0
+        }
+
+        .photo-grid:before {
+            left: 18px;
+            width: 2px;
+            background: linear-gradient(#ed78a2, #c8a9e8 55%, #efcb85)
+        }
+
+        .memory-item { grid-template-columns: 38px 108px minmax(0, 1fr); gap: 16px }
+
+        .memory-dot {
+            width: 14px;
+            height: 14px;
+            background: #e85f91;
+            box-shadow: 0 0 0 4px #f7dbe6, 0 0 18px #e85f9160
+        }
+
+        .polaroid {
+            padding: 7px 7px 10px;
+            box-shadow: 0 12px 24px #60485b25;
+            border-radius: 7px
+        }
+
+        .photo { border-radius: 4px }
+        .memory-copy strong { color: #a93669; font: 700 1rem Georgia, serif }
+        .memory-copy span { color: #756577; font-size: .88rem }
+        .change-hint { color: #bb6284 }
+        .gallery-note { color: #857887; font-size: .8rem }
+
+        .letter-paper {
+            color: #493643;
+            background: repeating-linear-gradient(#fffaf4 0 31px, #eadfe2 32px);
+            border: 1px solid #fff;
+            box-shadow: 0 20px 45px #74515c20, 0 2px 6px #74515c0c
+        }
+
+        .letter-paper p { color: #493643 }
+        .final-heart { filter: drop-shadow(0 12px 20px #d44d7e35) }
+
+        .progress {
+            height: 5px;
+            background: linear-gradient(90deg, #ffd77a, #f77da8 42%, #c39af7);
+            box-shadow: 0 0 18px #f77da875;
+            z-index: 30
+        }
+
+        .confetti { filter: drop-shadow(0 4px 5px #8b426438) }
+
+        @media(max-width:600px) {
+            #app { padding: max(12px, env(safe-area-inset-top)) 10px max(12px, env(safe-area-inset-bottom)) }
+            .card {
+                min-height: calc(100svh - 24px);
+                padding: 36px 20px;
+                border-radius: 26px
+            }
+            .step-count { margin-bottom: 22px }
+            .memory-item { grid-template-columns: 28px 86px minmax(0, 1fr); gap: 11px }
+            .photo-grid:before { left: 13px }
+            .memory-copy strong { font-size: .9rem }
+            .memory-copy span { font-size: .77rem }
+            .change-hint { font-size: .66rem }
+            .dark .card { min-height: calc(100svh - 24px) }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            .bg-glow { animation: none }
+            .card > :not(.stars):not(.decor):not(.memory-item) { animation: none }
+        }
+
+        /* Birthday cinema: replace the old pastel card with a full-screen night-sky stage. */
+        :root {
+            --pink: #ff6f9e;
+            --pink2: #ffc0d5;
+            --ink: #f7edf7;
+            --cream: #fffaf5;
+            --lav: #cbb1ff;
+            --gold: #ffd47b;
+        }
+
+        body {
+            background: #100d1c;
+            color: #f7edf7
+        }
+
+        .bg-glow {
+            background-size: 140% 140%;
+            animation: cinemaDrift 18s ease-in-out infinite alternate
+        }
+
+        @keyframes cinemaDrift {
+            from { background-position: 0% 50% }
+            to { background-position: 100% 50% }
+        }
+
+        #app {
+            min-height: 100svh;
+            padding: 0;
+            display: block
+        }
+
+        .card {
+            isolation: isolate;
+            width: 100%;
+            min-height: 100svh;
+            padding: clamp(42px, 9vh, 100px) clamp(24px, 10vw, 156px);
+            overflow: hidden;
+            border: 0;
+            border-radius: 0;
+            background: linear-gradient(90deg, #100d1c 0%, #100d1ced 42%, #100d1c55 100%);
+            box-shadow: none;
+            align-items: flex-start;
+            justify-content: center;
+            text-align: left;
+            animation: cinemaEnter .9s cubic-bezier(.16, 1, .3, 1) both
+        }
+
+        .card:after {
+            content: "";
+            position: absolute;
+            z-index: 0;
+            top: 50%;
+            right: clamp(-140px, 5vw, 100px);
+            width: min(46vw, 650px);
+            aspect-ratio: 1;
+            border: 1px solid #ffffff20;
+            border-radius: 50%;
+            background:
+                radial-gradient(circle at 36% 31%, #ffffff15 0 1px, transparent 2px),
+                radial-gradient(circle at 66% 70%, #ffffff13 0 1px, transparent 2px),
+                radial-gradient(circle at 50% 50%, #ee6f9d13, #a552b70b 46%, transparent 70%);
+            box-shadow: 0 0 0 24px #ffffff04, 0 0 0 72px #ffffff03, inset 0 0 100px #ee6f9d10;
+            transform: translateY(-50%);
+            animation: orbitBreath 8s ease-in-out infinite alternate;
+            pointer-events: none
+        }
+
+        @keyframes cinemaEnter {
+            from { opacity: 1; transform: scale(.985); filter: blur(2px) }
+            to { opacity: 1; transform: scale(1); filter: blur(0) }
+        }
+
+        @keyframes orbitBreath {
+            from { transform: translateY(-50%) scale(.94) rotate(-8deg) }
+            to { transform: translateY(-50%) scale(1.04) rotate(8deg) }
+        }
+
+        .card > :not(.stars):not(.decor):not(.memory-item) {
+            animation: cinemaText .7s cubic-bezier(.2, .8, .2, 1) both
+        }
+
+        @keyframes cinemaText {
+            from { opacity: 1; transform: translateY(12px) }
+            to { opacity: 1; transform: translateY(0) }
+        }
+
+        .eyebrow {
+            color: #ff9fbd;
+            font: 600 .76rem/1.5 "Segoe UI", system-ui, sans-serif;
+            letter-spacing: .22em;
+            text-transform: uppercase
+        }
+
+        h1, h2 {
+            max-width: 1100px;
+            color: #fff8f4;
+            font-family: Georgia, "Times New Roman", serif;
+            letter-spacing: -.055em
+        }
+
+        h1 { font-size: clamp(3rem, 7vw, 6.4rem); line-height: .96 }
+        h2 { font-size: clamp(2.6rem, 6.5vw, 5.2rem); line-height: .99 }
+
+        h1 em {
+            color: #ff80a8;
+            font-weight: 500;
+            text-shadow: 0 0 48px #ed538557
+        }
+
+        p {
+            max-width: 510px;
+            color: #c8bdce;
+            font: 400 clamp(1rem, 1.7vw, 1.14rem)/1.8 "Segoe UI", system-ui, sans-serif
+        }
+
+        .small, .gallery-note, .welcome-hint { color: #a99db2 }
+
+        .welcome-kicker {
+            display: inline-flex;
+            background: #ffffff08;
+            border: 1px solid #ffffff24;
+            color: #ffd4e0;
+            box-shadow: 0 0 30px #e4568c16;
+            font-size: .68rem;
+            letter-spacing: .2em
+        }
+
+        .welcome-title { max-width: 1100px; text-shadow: none }
+        .welcome-copy { max-width: 460px }
+        .card > :not(.decor):not(.stars) { position: relative; z-index: 1 }
+
+        .step-count {
+            border: 1px solid #ffffff26;
+            background: #ffffff08;
+            color: #ffcfde;
+            font-size: .66rem;
+            letter-spacing: .2em
+        }
+
+        .primary, .secondary {
+            min-height: 54px;
+            padding: 15px 27px;
+            border-radius: 4px;
+            font: 650 .9rem "Segoe UI", system-ui, sans-serif;
+            letter-spacing: .035em
+        }
+
+        .primary {
+            color: #1c1020;
+            background: linear-gradient(110deg, #ffd78b, #ff9ebb);
+            box-shadow: 0 8px 30px #ec68934d, inset 0 1px #ffffffb0
+        }
+
+        .primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 13px 38px #ec68936b, inset 0 1px #ffffffb0
+        }
+
+        .secondary {
+            color: #ffe4ed;
+            border: 1px solid #ffffff38;
+            background: #ffffff0b
+        }
+
+        .btn-row { justify-content: flex-start }
+        .decor { filter: drop-shadow(0 0 14px #f27baa77) }
+        .sparkle { color: #ffd47b }
+
+        .envelope {
+            margin: 24px 0 26px;
+            filter: drop-shadow(0 24px 36px #00000066)
+        }
+
+        .envelope:hover { filter: drop-shadow(0 28px 42px #f16a9d40) }
+        .envelope.open .seal { opacity: 0; transition: opacity .25s }
+
+        .bear {
+            font-size: clamp(4.5rem, 10vw, 7rem);
+            filter: drop-shadow(0 16px 30px #ed7c9a48);
+            animation: bearFloat 2.8s ease-in-out infinite
+        }
+
+        .lamp {
+            font-size: clamp(4rem, 8vw, 6rem);
+            filter: drop-shadow(0 0 34px #ffd767)
+        }
+
+        .dark { background: transparent; color: #fff8f4 }
+        .dark .card { background: linear-gradient(90deg, #100d1ce8, #100d1c55 100%) }
+        .dark h2 { color: #fff8f4 }
+        .dark p { color: #c8bdce }
+        .dark .eyebrow { color: #ffd47b }
+        .dark .step-count { border-color: #ffffff26; background: #ffffff08; color: #ffe3a3 }
+
+        .stars {
+            opacity: .8;
+            mask-image: linear-gradient(90deg, #000 0%, #000 58%, transparent 100%)
+        }
+
+        .cake {
+            filter: drop-shadow(0 24px 34px #ed70a143);
+            animation: cakeArrive .8s cubic-bezier(.2, .8, .2, 1) both
+        }
+
+        .photo-grid {
+            width: min(680px, 100%);
+            max-width: 680px;
+            gap: 18px;
+            padding: 12px 0
+        }
+
+        .photo-grid:before {
+            left: 18px;
+            background: linear-gradient(#ff79a7, #b696ed 55%, #ffd47b)
+        }
+
+        .memory-item { grid-template-columns: 38px 96px minmax(0, 1fr); gap: 15px }
+
+        .memory-dot {
+            border-color: #171222;
+            background: #ff7ca7;
+            box-shadow: 0 0 0 2px #ff7ca7, 0 0 20px #ff7ca788
+        }
+
+        .polaroid {
+            padding: 6px 6px 8px;
+            box-shadow: 0 12px 32px #00000055;
+            border-radius: 3px
+        }
+
+        .photo { border-radius: 1px }
+        .memory-copy strong { color: #ff9fbd; font: 700 1rem Georgia, serif }
+        .memory-copy span { color: #d0c4d5 }
+        .change-hint { color: #a99bb1 }
+
+        .letter-paper {
+            width: min(560px, 100%);
+            padding: 25px 28px 30px;
+            border: 0;
+            border-left: 3px solid #f47eaa;
+            border-radius: 0 8px 8px 0;
+            background: linear-gradient(135deg, #fff8ed, #f8e7e8);
+            box-shadow: 0 24px 70px #00000045;
+            transform: none
+        }
+
+        .letter-paper p { color: #493643 }
+        .final-heart { filter: drop-shadow(0 0 32px #ff6b9b99) }
+
+        .progress {
+            height: 3px;
+            background: linear-gradient(90deg, #ffd47b, #ff6b9b, #bd8cff);
+            box-shadow: 0 0 20px #ff6b9b88
+        }
+
+        .confetti { filter: drop-shadow(0 0 8px #ff8eaf88) }
+
+        @media(max-width:600px) {
+            #app { padding: 0 }
+
+            .card {
+                min-height: 100svh;
+                padding: 62px 25px 52px;
+                border-radius: 0;
+                background: linear-gradient(180deg, #100d1cdd, #100d1c99 65%, #100d1ce8)
+            }
+
+            .card:after {
+                top: 24%;
+                right: -25%;
+                width: 88vw;
+                opacity: .65
+            }
+
+            h1 { font-size: clamp(2.2rem, 10vw, 4.4rem) }
+            h2 { font-size: clamp(2.5rem, 11vw, 4rem) }
+            .welcome-kicker { font-size: .58rem; letter-spacing: .12em }
+            .step-count { margin-bottom: 23px }
+            .envelope { width: min(330px, 86vw) }
+            .memory-item { grid-template-columns: 28px 78px minmax(0, 1fr); gap: 12px }
+            .photo-grid:before { left: 13px }
+            .memory-copy strong { font-size: .88rem }
+            .memory-copy span { font-size: .74rem }
+            .change-hint { font-size: .63rem }
+            .letter-paper { padding: 20px 19px }
+            .btn-row { gap: 6px }
+            .primary, .secondary { min-height: 50px; padding: 13px 17px }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            .bg-glow, .card:after { animation: none }
+        }
     </style>
 </head>
 
@@ -751,18 +1349,20 @@
         let step = 0, wished = false;
         const app = document.getElementById('app'), bg = document.getElementById('bg'), progress = document.getElementById('progress');
         function button(label, fn, secondary = false) { return `<button class="${secondary ? 'secondary' : 'primary'}" onclick="${fn}">${label}</button>` }
-        function shell(content, extra = '') { return `<section class="card ${extra}">${content}</section>` }
+        function shell(content, extra = '') { return `<section class="card chapter-${step} ${extra}">${content}</section>` }
         function render() {
             progress.style.width = (step / 7 * 100) + '%';
             document.body.classList.toggle('night', step === 1);
-            bg.style.background = step === 1 ? 'radial-gradient(circle at 50% 35%,#252651,#080a1b 75%)' : 'radial-gradient(circle at 20% 15%,#fff 0,transparent 32%),radial-gradient(circle at 85% 80%,#f7d5e5 0,transparent 35%),linear-gradient(135deg,#fffaf4,#fce8f1 55%,#eee9ff)';
+            const stageGlows = ['#e94d875c', '#7867ff62', '#ff568e55', '#fc9c4d55', '#8e70ff50', '#df568c43', '#a97aff4a', '#ff718f64'];
+            document.body.dataset.step = step;
+            bg.style.background = `radial-gradient(ellipse at 76% 50%,${stageGlows[step]} 0,transparent 42%),radial-gradient(ellipse at 18% 82%,#48315c75 0,transparent 42%),linear-gradient(135deg,#100d1c,#171024 55%,#100d1c)`;
             let c = '';
-            if (step === 0) c = `<span class="decor sparkle" style="top:8%;left:9%">✦</span><span class="decor" style="top:12%;right:9%;font-size:2rem">💗</span><span class="decor" style="bottom:12%;left:8%;font-size:1.5rem">🌸</span><div class="welcome-kicker">♡ a little surprise, made with love ♡</div><p class="eyebrow">hey ${esc(recipient)}…</p><h1 class="welcome-title">Something <em>special</em><br>is waiting for you</h1><p class="welcome-copy">A tiny collection of smiles, memories and a whole lot of love — made just for your day.</p><div class="envelope" id="envelope" onclick="this.classList.add('open');setTimeout(next,650)"><div class="letter"><span style="font-size:1.35rem;color:#a94b72">For ${esc(recipient)} ♡</span><span style="color:#d74d83;font:italic 1rem cursive;margin-top:8px">a little note for you</span></div><div class="flap"></div><div class="seal">♡</div></div>${button('💌 Open your surprise', 'next()')}<span class="welcome-hint"> <span>☝️</span> Tap the envelope or open the surprise</span>`;
+            if (step === 0) c = `<span class="decor sparkle" style="top:8%;left:9%">✦</span><span class="decor" style="top:12%;right:9%;font-size:2rem">💗</span><span class="decor" style="bottom:12%;left:8%;font-size:1.5rem">🌸</span><div class="welcome-kicker">♡ a little surprise, made with love ♡</div><p class="eyebrow">hey ${esc(recipient)}…</p><h1 class="welcome-title">Something <em>special</em><br>is waiting for you</h1><p class="welcome-copy">A tiny collection of smiles, memories and a whole lot of love — made just for your day.</p><div class="envelope" id="envelope" onclick="openSurprise()"><div class="letter"><span style="font-size:1.35rem;color:#a94b72">For ${esc(recipient)} ♡</span><span style="color:#d74d83;font:italic 1rem cursive;margin-top:8px">a little note for you</span></div><div class="flap"></div><div class="seal">♡</div></div>${button('💌 Open your surprise', 'openSurprise()')}<span class="welcome-hint"> <span>☝️</span> Tap the envelope or open the surprise</span>`;
             if (step === 1) c = `<div class="stars"></div><div class="step-count">SURPRISE 01 · THE LIGHTS</div><p class="eyebrow">shhh...</p><div class="lamp">🌙</div><h2>The room is<br>waiting for you.</h2><p>Someone left the lights off on purpose.<br>Shall we make this a little brighter?</p>${button('✨ Turn on the lights', 'lightsOn()')}`;
             if (step === 2) c = `<span class="decor" style="top:8%;right:8%;font-size:2rem">🎈</span><span class="decor" style="bottom:15%;left:6%;font-size:2.5rem">🧸</span><div class="step-count">SURPRISE 02 · YOUR DAY</div><p class="eyebrow">look who's having a birthday...</p><h1>Happy Birthday,<br><em>${esc(recipient)}</em> ✨</h1>${birthdayDate ? `<p class="small">🎂 ${esc(birthdayDate)}</p>` : ''}<div class="bear">🧸🎁</div><p>May this new chapter bring you a thousand tiny reasons to smile.</p>${button("There's more 💝", 'next()')}`;
             if (step === 3) c = `<div class="step-count">SURPRISE 03 · CAKE TIME</div><p class="eyebrow">make a little wish</p><h2>Make the first cut ✨</h2><p class="small">Swipe down across the cake, or tap the cake to cut it.</p><div class="cake" id="cake" onclick="cutCake()"><div class="tier bottom"></div><div class="tier mid"></div><div class="tier top"></div><div class="candle"><i class="flame"></i></div><div class="candle"><i class="flame"></i></div><div class="candle"><i class="flame"></i></div><div class="cake-slice"><span class="slice-top"></span><span class="slice-mid"></span><span class="slice-cream"></span><span class="slice-bottom"></span></div></div><p id="cake-msg">Three candles, a hundred wishes. Make yours count. 🕯️</p><div class="btn-row">${button('🔪 Cut the cake', 'cutCake()', true)}${button('🕯️ Blow out candles', 'blowCandles()')}</div><div id="cake-next"></div>`;
             if (step === 4) c = `<span class="decor" style="top:12%;left:12%;font-size:2rem">⭐</span><div class="step-count">SURPRISE 04 · A LITTLE WISH</div><p class="eyebrow">close your eyes...</p><div class="bear">🧸 🎂</div><h2>Make a little wish<br>for the year ahead.</h2><p>Think of something your heart has been quietly hoping for. You deserve beautiful things, and beautiful days.</p>${button('✨ I made my wish', 'makeWish()')}<div id="wish-msg"></div>`;
-            if (step === 5) c = `<div class="step-count">SURPRISE 05 · LITTLE MEMORIES</div><p class="eyebrow">little moments, kept close</p><h2>Our memory timeline 📸</h2><p>A little timeline of memories, from 2019 to 2026.</p><div class="photo-grid">${photos.map((p, i) => `<div class="memory-item" style="--delay:${i * .10}s"><span class="memory-dot"></span><div class="polaroid" style="--rot:${i % 2 === 0 ? '-2deg' : '2deg'}"><div class="photo"><img alt="${p.year} birthday memory" src="${p.image}"></div></div><div class="memory-copy"><strong>${p.year} ✨</strong><span>${p.caption}</span><small class="change-hint">A little piece of our story</small></div></div>`).join('')}</div><p class="gallery-note">These are local starter illustrations. You can replace the image files inside the images folder with your own photos.</p>${button('Read your letter 💌', 'next()')}`;
+            if (step === 5) c = `<div class="step-count">SURPRISE 05 · LITTLE MEMORIES</div><p class="eyebrow">little moments, kept close</p><h2>Our memory timeline 📸</h2><p>A little timeline of memories, from 2019 to 2026.</p><div class="photo-grid">${photos.map((p, i) => `<div class="memory-item" style="--delay:${i * .10}s"><span class="memory-dot"></span><div class="polaroid" style="--rot:${i % 2 === 0 ? '-2deg' : '2deg'}"><div class="photo"><img alt="${p.year} birthday memory" src="${p.image}"></div></div><div class="memory-copy"><strong>${p.year} ✨</strong><span>${p.caption}</span><small class="change-hint">A little piece of our story</small></div></div>`).join('')}</div><p class="gallery-note">Eight years of little moments — and a lifetime of memories still to come.</p>${button('Read your letter 💌', 'next()')}`;
             if (step === 6) c = `<div class="step-count">SURPRISE 06 · JUST FOR YOU</div><p class="eyebrow">a little note from my heart</p><h2>For you, ${esc(recipient)} 💗</h2><div class="letter-paper" id="typed-letter"><p data-type="Happy birthday, you wonderful human."></p><p data-type="I wanted to make you something that felt a little like you — warm, a bit silly, and full of tiny surprises. So here it is: a small corner of the internet that exists only because you do."></p><p data-type="Thank you for the laughs, the little moments, and all the memories still waiting to happen. I hope this year brings you peaceful mornings, good news, and every reason to smile."></p><p data-type="Whatever you wished for, I hope it finds its way to you. And if it takes a little while, I hope you remember how loved and appreciated you are."></p><p data-type="With love, ${sender} ♡" style="text-align:right;font-style:italic"></p></div>${button('One last thing ✨', 'next()')}`;
             if (step === 7) c = `<div class="step-count">YOUR FINAL SURPRISE</div><div class="final-heart">💗</div><p class="eyebrow">made especially for you</p><h1>Happy Birthday,<br><em>${esc(recipient)}!</em> 🎂</h1><p>May your days be soft, your dreams be big, and your heart always find reasons to feel happy.</p><p style="font-style:italic">You deserve to feel special — today and every day.</p>${button('↻ Replay the surprise', 'restart()', true)}<p class="small">Made with a little code and a lot of heart.</p>`;
             app.innerHTML = shell(c, step === 1 ? 'dark' : '');
@@ -773,6 +1373,16 @@
             if (step === 6) typeLetter();
         }
         function esc(s) { return String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) }
+        let openingSurprise = false;
+        function openSurprise() {
+            if (openingSurprise || step !== 0) return;
+            openingSurprise = true;
+            document.getElementById('envelope').classList.add('open');
+            setTimeout(() => {
+                openingSurprise = false;
+                if (step === 0) next();
+            }, 760);
+        }
         function next() { step = Math.min(step + 1, 7); render(); if (step === 2 || step === 7) confetti() }
         function lightsOn() { step = 2; render(); confetti() }
         function cutCake() { const cake = document.getElementById('cake'); if (!cake || cake.classList.contains('cut')) return; cake.classList.add('cut'); document.getElementById('cake-msg').textContent = 'A perfect little slice, just for you! 🍰'; document.getElementById('cake-next').innerHTML = button('Next surprise 💗', 'next()'); confetti(18) }
